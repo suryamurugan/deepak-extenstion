@@ -2,12 +2,25 @@
   "manifest_version": 3,
   "name": "Deepak",
   "version": "1.0",
-  "permissions": ["activeTab", "scripting", "tabs"],
+  "permissions": ["activeTab", "scripting", "tabs", "ttsEngine"],
+
   "host_permissions": [
     "https://google.com/",
     "https://diksha.gov.in/",
-    "https://deepak.prashne.com"
+    "https://deepak.prashne.com",
+    "https://deepak.raj.how"
   ],
+
+  "tts_engine": {
+    "voices": [
+      {
+        "voice_name": "Alice",
+        "lang": "en-US",
+        "event_types": ["start", "marker", "end"]
+      }
+    ]
+  },
+
   "background": {
     "service_worker": "background.js"
   },

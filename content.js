@@ -35,6 +35,7 @@ function handleKeyUp(event) {
   if (isRecognitionActive() && event.code === 'AltLeft') {
     console.log('Alt key is released');
     stopRecognition();
+
   }
   event.preventDefault();
 }
@@ -99,13 +100,17 @@ function uploadTranscript(user_query, url, timestamp) {
   const payload = { user_query, url, timestamp };
   console.log('Uploading payload:', payload);
 
-  fetch('https://deepak.prashne.com/api/ai', {
+  fetch('https://deepak.raj.how/api/ai', {
     method: 'POST',
+    mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
   .then(response => response.json())
-  .then(data => console.log('Success:', data))
+  .then(data => {
+    console.log('Success:', data)
+    speak("Deepak is a Chrome extension designed to enhance user interaction on web pages by utilizing speech recognition. This extension captures audio through speech recognition when activated, transcribes it, and can help the user understand content based on the transcribed text. It's particularly useful for educational and accessibility purposes.");
+})
   .catch(error => console.error('Error:', error));
 }
 
@@ -158,3 +163,10 @@ function hideListeningIcon() {
     icon.style.display = 'none';
   }
 }
+
+function speak(text) {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    synth.speak(utterance);
+  }
